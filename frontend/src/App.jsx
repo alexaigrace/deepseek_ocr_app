@@ -49,7 +49,7 @@ function App() {
 
   const handleSubmit = async () => {
     if (!image) {
-      setError('Please upload an image first')
+      setError('请先上传一张图片')
       return
     }
 
@@ -241,12 +241,12 @@ function App() {
                 {loading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    <span className="font-semibold">Processing Magic...</span>
+                    <span className="font-semibold">施法中...</span>
                   </>
                 ) : (
                   <>
                     <Zap className="w-5 h-5" />
-                    <span className="font-semibold">Analyze Image</span>
+                    <span className="font-semibold">分析图片</span>
                   </>
                 )}
               </div>
@@ -285,7 +285,8 @@ function App() {
         <div className="max-w-7xl mx-auto px-6 py-8 text-center">
           <p className="text-sm text-gray-400">
             Powered by <span className="gradient-text font-semibold">DeepSeek-OCR</span> • 
-            Built with <span className="text-pink-400">♥</span> using React + FastAPI
+            Built with <span className="text-pink-400">♥</span> using React + FastAPI • 
+            由 <span className="text-pink-400">G-Race AI Learning Community</span> 汉化
           </p>
         </div>
       </footer>
