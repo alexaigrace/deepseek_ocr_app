@@ -21,7 +21,7 @@ export default function ImageUpload({ onImageSelect, preview }) {
   return (
     <div className="glass p-6 rounded-2xl space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-gray-200">Upload Image</h3>
+        <h3 className="font-semibold text-gray-200">上传图片</h3>
         <ImageIcon className="w-5 h-5 text-purple-400" />
       </div>
 
@@ -59,10 +59,10 @@ export default function ImageUpload({ onImageSelect, preview }) {
             
             <div>
               <p className="text-lg font-medium text-gray-200">
-                {isDragActive ? 'Drop it like it\'s hot! 🔥' : 'Drag & drop your image'}
+                {isDragActive ? '把图片拖放进去吧 🔥' : '拖放图片'}
               </p>
               <p className="text-sm text-gray-400 mt-1">
-                or click to browse • PNG, JPG, WEBP up to 10MB
+                或者 点此添加本地图片 • PNG, JPG, WEBP 不超过 10MB 大小
               </p>
             </div>
           </div>
@@ -87,10 +87,10 @@ export default function ImageUpload({ onImageSelect, preview }) {
               className="bg-red-500/90 backdrop-blur-sm px-3 py-2 rounded-full opacity-100 hover:bg-red-600 transition-colors flex items-center gap-2 shadow-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              title="Remove image"
+              title="删除图片"
             >
               <X className="w-4 h-4" />
-              <span className="text-sm font-medium">Remove</span>
+              <span className="text-sm font-medium">删除</span>
             </motion.button>
           </div>
         </motion.div>
