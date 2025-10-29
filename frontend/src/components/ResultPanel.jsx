@@ -32,7 +32,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
   // Draw boxes function
   const drawBoxes = useCallback(() => {
     if (!result?.boxes?.length || !canvasRef.current || !imgRef.current) {
-      console.log('❌ Cannot draw - missing:', {
+      console.log('❌ 绘制失败，缺少组件:', {
         hasBoxes: !!result?.boxes?.length,
         hasCanvas: !!canvasRef.current,
         hasImgRef: !!imgRef.current
@@ -40,13 +40,13 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
       return
     }
 
-    console.log('🎨 Drawing boxes:', result.boxes)
+    console.log('🎨 边框绘制中:', result.boxes)
 
     const img = imgRef.current
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     
-    console.log('📐 Image dimensions:', {
+    console.log('📐 图片尺寸:', {
       displayWidth: img.offsetWidth,
       displayHeight: img.offsetHeight,
       naturalWidth: img.naturalWidth,
@@ -64,7 +64,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
     const scaleX = img.offsetWidth / (result.image_dims?.w || img.naturalWidth)
     const scaleY = img.offsetHeight / (result.image_dims?.h || img.naturalHeight)
     
-    console.log('📏 Scale factors:', { scaleX, scaleY })
+    console.log('📏 比例设置:', { scaleX, scaleY })
     
     // Draw boxes
     result.boxes.forEach((box, idx) => {
@@ -80,7 +80,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
       const sw = (x2 - x1) * scaleX
       const sh = (y2 - y1) * scaleY
       
-      console.log(`📦 Box ${idx} (${box.label}):`, {
+      console.log(`📦 边框 ${idx} (${box.label}):`, {
         original: [x1, y1, x2, y2],
         scaled: [sx, sy, sx + sw, sy + sh],
         dimensions: { width: sw, height: sh }
@@ -114,13 +114,13 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
       }
     })
     
-    console.log('✅ Finished drawing', result.boxes.length, 'boxes')
+    console.log('✅ 边框绘制完成', result.boxes.length, 'boxes')
   }, [result])
 
   // Trigger drawing when image loads
   useEffect(() => {
     if (imageLoaded && result?.boxes?.length) {
-      console.log('🚀 Image loaded, drawing boxes now')
+      console.log('🚀 图片加载完成，边框绘制中')
       drawBoxes()
     }
   }, [imageLoaded, result, drawBoxes])
@@ -135,7 +135,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
     if (!imageLoaded || !result?.boxes?.length) return
     
     const handleResize = () => {
-      console.log('📐 Window resized, redrawing')
+      console.log('📐 窗口尺寸调整，重绘中')
       drawBoxes()
     }
     
@@ -148,7 +148,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-purple-400" />
-          <h3 className="font-semibold text-gray-200">Results</h3>
+          <h3 className="font-semibold text-gray-200">结果/h3>
         </div>
         
         {result && (
@@ -193,7 +193,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
               <Loader2 className="w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-purple-400" />
             </div>
             <p className="text-sm text-gray-400 animate-pulse">
-              Processing your image with AI magic...
+              正在对图片施加💫AI魔法💫...
             </p>
           </motion.div>
         ) : result ? (
@@ -213,7 +213,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
                   alt="Result" 
                   className="w-full block" 
                   onLoad={() => {
-                    console.log('🖼️ Image loaded, triggering draw')
+                    console.log('🖼️ 图片加载完成, 正在启动绘制模块')
                     setImageLoaded(true)
                   }}
                 />
@@ -250,11 +250,11 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
             {result.raw_text && (
               <details className="glass rounded-xl overflow-hidden">
                 <summary className="px-4 py-3 cursor-pointer flex items-center justify-between hover:bg-white/5 transition-colors">
-                  <span className="text-sm font-medium text-gray-300">🔍 Raw Model Response</span>
+                  <span className="text-sm font-medium text-gray-300">🔍 纯模型回答 </span>
                   <ChevronDown className="w-4 h-4 text-gray-400" />
                 </summary>
                 <div className="px-4 py-3 border-t border-white/10 space-y-2">
-                  <p className="text-xs text-gray-400 mb-2">Unprocessed output from the model (useful for debugging)</p>
+                  <p className="text-xs text-gray-400 mb-2">未经模型处理的输出(用于开发模式)</p>
                   <div className="bg-black/30 rounded-lg p-3 max-h-64 overflow-y-auto">
                     <pre className="text-xs text-green-400 font-mono whitespace-pre-wrap break-words select-all">
                       {result.raw_text}
@@ -265,10 +265,10 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
                       onClick={() => navigator.clipboard.writeText(result.raw_text)}
                       className="text-xs px-3 py-1 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
                     >
-                      Copy Raw
+                      复制内容
                     </button>
                     <span className="text-xs text-gray-500 py-1">
-                      {result.raw_text.length} characters
+                      {result.raw_text.length} 字符
                     </span>
                   </div>
                 </div>
@@ -278,13 +278,13 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
             {/* Advanced Settings Dropdown */}
             <details className="glass rounded-xl overflow-hidden">
               <summary className="px-4 py-3 cursor-pointer flex items-center justify-between hover:bg-white/5 transition-colors">
-                <span className="text-sm font-medium text-gray-300">⚙️ Metadata & Debug Info</span>
+                <span className="text-sm font-medium text-gray-300">⚙️ 元数据和开发模式 </span>
                 <ChevronDown className="w-4 h-4 text-gray-400" />
               </summary>
               <div className="px-4 py-3 border-t border-white/10 space-y-3">
                 {result.metadata && (
                   <div>
-                    <p className="text-xs text-gray-400 mb-2">Processing Metadata</p>
+                    <p className="text-xs text-gray-400 mb-2">处理元数据</p>
                     <pre className="text-xs text-gray-500 whitespace-pre-wrap">
                       {JSON.stringify(result.metadata, null, 2)}
                     </pre>
@@ -292,7 +292,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
                 )}
                 {result.boxes?.length > 0 && (
                   <div>
-                    <p className="text-xs text-gray-400 mb-2">Parsed Bounding Boxes ({result.boxes.length})</p>
+                    <p className="text-xs text-gray-400 mb-2">解析方框 ({result.boxes.length})</p>
                     <div className="bg-black/30 rounded-lg p-2 space-y-1 max-h-32 overflow-y-auto">
                       {result.boxes.map((box, idx) => (
                         <div key={idx} className="text-xs font-mono">
@@ -305,7 +305,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
                       ))}
                     </div>
                     <p className="text-xs text-gray-500 mt-2">
-                      Coordinates are scaled from model output (0-999) to image pixels
+                      坐标缩放范围为模型输出值（0-999）到图像像素值之间
                     </p>
                   </div>
                 )}
@@ -319,7 +319,7 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
               className="flex items-center justify-center gap-2 text-green-400"
             >
               <CheckCircle2 className="w-5 h-5" />
-              <span className="text-sm font-medium">Processing complete!</span>
+              <span className="text-sm font-medium">处理完成!</span>
             </motion.div>
           </motion.div>
         ) : (
@@ -343,10 +343,10 @@ export default function ResultPanel({ result, loading, imagePreview, onCopy, onD
             </div>
             <div className="text-center">
               <p className="text-lg font-medium text-gray-300">
-                Ready to process
+                已准备好
               </p>
               <p className="text-sm text-gray-500 mt-1">
-                Upload an image and hit analyze to see the magic!
+                上传图片,点击"分析"按钮,见证奇迹的时刻!
               </p>
             </div>
           </motion.div>
