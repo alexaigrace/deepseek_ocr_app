@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import { FileText, Eye, Search, Wand2 } from 'lucide-react'
 
 const modes = [
-  { id: 'plain_ocr', name: 'Plain OCR', icon: FileText, color: 'from-blue-500 to-cyan-500', desc: 'Extract raw text', needsInput: false },
-  { id: 'describe', name: 'Describe', icon: Eye, color: 'from-violet-500 to-purple-500', desc: 'Image description', needsInput: false },
-  { id: 'find_ref', name: 'Find', icon: Search, color: 'from-yellow-500 to-orange-500', desc: 'Locate specific terms', needsInput: 'findTerm' },
-  { id: 'freeform', name: 'Freeform', icon: Wand2, color: 'from-fuchsia-500 to-pink-500', desc: 'Custom prompt', needsInput: 'prompt' },
+  { id: 'plain_ocr', name: '纯图文识别', icon: FileText, color: 'from-blue-500 to-cyan-500', desc: '仅识别原文字', needsInput: false },
+  { id: 'describe', name: '描述', icon: Eye, color: 'from-violet-500 to-purple-500', desc: '描述图像内容', needsInput: false },
+  { id: 'find_ref', name: '搜索', icon: Search, color: 'from-yellow-500 to-orange-500', desc: '查找指定内容', needsInput: 'findTerm' },
+  { id: 'freeform', name: '自由指令', icon: Wand2, color: 'from-fuchsia-500 to-pink-500', desc: '自定义提示词', needsInput: 'prompt' },
 ]
 
 export default function ModeSelector({ 
@@ -79,7 +79,7 @@ export default function ModeSelector({
             type="text"
             value={findTerm}
             onChange={(e) => onFindTermChange(e.target.value)}
-            placeholder="Enter term to find (e.g., Total, Invoice #)"
+            placeholder="输入需要搜索的内容（例如：总额、发票号码等）"
             className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-purple-500 transition-colors"
           />
         </motion.div>
@@ -94,7 +94,7 @@ export default function ModeSelector({
           <textarea
             value={prompt}
             onChange={(e) => onPromptChange(e.target.value)}
-            placeholder="Enter your custom prompt..."
+            placeholder="输入你的提示词"
             className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-purple-500 transition-colors resize-none"
             rows={2}
           />
