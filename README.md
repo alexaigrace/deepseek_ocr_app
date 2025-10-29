@@ -17,7 +17,7 @@ Modern OCR web application powered by DeepSeek-OCR with a stunning React fronten
 
 1. **Clone and configure:**
    ```bash
-   git clone <repository-url>
+   git clone alexaigrace/deepseek_ocr_app
    cd deepseek_ocr_app
    
    # Copy and customize environment variables
@@ -30,7 +30,7 @@ Modern OCR web application powered by DeepSeek-OCR with a stunning React fronten
    docker compose up --build
    ```
 
-   The first run will download the model (~5-10GB), which may take some time.
+   The first run will download the model (~5-10GB), which may take some time. **The translated version has switched download channel to Modelscope to adapt China's network, for not waiting that long. :P**
 
 3. **Access the application:**
    - **Frontend**: http://localhost:3000 (or your configured FRONTEND_PORT)
@@ -71,6 +71,8 @@ FRONTEND_PORT=3000
 # Model Configuration
 MODEL_NAME=deepseek-ai/DeepSeek-OCR
 HF_HOME=/models
+# model download changed from hf to modelscope
+MODELSCOPE_CACHE=/models
 
 # Upload Configuration
 MAX_UPLOAD_SIZE_MB=100  # Maximum file upload size
