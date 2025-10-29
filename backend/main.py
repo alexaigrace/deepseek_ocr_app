@@ -32,7 +32,7 @@ async def lifespan(app: FastAPI):
     os.makedirs(HF_HOME, exist_ok=True)
     
     # Load model
-    print(f"🚀 Loading {MODEL_NAME}...")
+    print(f"🚀 正在加载 {MODEL_NAME} 模型...")
     torch_dtype = torch.bfloat16
     
     tokenizer = AutoTokenizer.from_pretrained(
@@ -57,7 +57,7 @@ async def lifespan(app: FastAPI):
     except Exception:
         pass
     
-    print("✅ Model loaded and ready!")
+    print("✅ 模型已准备好!")
     
     yield
     
@@ -237,7 +237,7 @@ def parse_detections(text: str, image_width: int, image_height: int) -> List[Dic
 # -----------------------------
 @app.get("/")
 async def root():
-    return {"message": "DeepSeek-OCR API is running! 🚀", "docs": "/docs"}
+    return {"message": "DeepSeek-OCR API 正在运行! 🚀", "docs": "/docs"}
 
 @app.get("/health")
 async def health():
